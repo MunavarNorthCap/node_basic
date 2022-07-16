@@ -1,5 +1,6 @@
-const dbConnect = require('./mongodb');
+const dbConnect = require('./mongodb'); 
 
+// Promise Method
 // dbConnect().then((resp) => {
 //     // console.log(resp.find().toArray());	
 
