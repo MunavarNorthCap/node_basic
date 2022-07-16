@@ -1,0 +1,3 @@
+inside the file this text come
+
+// node index.js newFile.txt 'inside the file this text come'
