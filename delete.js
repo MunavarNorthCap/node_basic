@@ -8,10 +8,12 @@ const deleteData = async () => {
         name: 'max pro 2'
     });
     console.warn(result);
+    
+    // use deleteOne() -> 1 data to remove
 
     if(result.acknowledged) {
         console.warn("record deleted")
     }
-}
+};
 
 deleteData();
