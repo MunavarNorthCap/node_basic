@@ -14,4 +14,4 @@ async function dbConnect() {
     return db.collection('products');
 }
 
-module.exports = dbConnect;
+module.exports = dbConnect; 
