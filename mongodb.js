@@ -10,8 +10,8 @@ const database = 'eComDB';
 async function dbConnect() {
     let result = await client.connect();
     db = result.db(database);
-
-    return db.collection('products');
+    collection = db.collection('products');
+    return collection;
 }
 
 module.exports = dbConnect; 
