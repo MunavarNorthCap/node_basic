@@ -1,64 +1,25 @@
-const mongoose = require('mongoose');
+const dbConnect = require('./mongodb'); 
 
-mongoose.connect("mongodb://0.0.0.0:27017/eComDB");
+// Promise Method
+// dbConnect().then((resp) => {
+//     // console.log(resp.find().toArray());	
 
-const ProductSchema = new mongoose.Schema({
-    name: String,
-    price: Number,
-    brand: String,
-    category: String 
-});
+//     resp.find().toArray().then((data) => {	// Here toArray() acts as promise
+//         console.warn(data)
+//     });
 
-const saveInDB = async () => {    
-    const ProductModel = mongoose.model('products', ProductSchema);
+//     // resp.find({name: 'A 50'}).toArray().then((data) => {
+//     //     console.warn(data)
+//     // });
+// });
 
-    let data = new ProductModel({
-        name: 'Note Pro', 
-        price: 17800, 
-        brand: 'Mi', 
-        category: 'Mobile'
-    });
-    let result = await data.save();
-    console.log(result);  
+// async await
+const main = async () => {
+    let data = await dbConnect();
+    data = await data.find().toArray();
+    console.log(data);
 }
-// saveInDB();
 
-const updateInDB = async () => {
-    const ProductModel = mongoose.model('products', ProductSchema);
-    let data = await ProductModel.updateOne(
-        {name: "Pro 7"},
-        {$set: {name: 'Pro 8', price: 6000}}
-    );
-    console.log(data);
-    // {
-    //     acknowledged: true,
-    //     modifiedCount: 1,
-    //     upsertedId: null,
-    //     upsertedCount: 0,
-    //     matchedCount: 1
-    // }
-};
-// updateInDB();
+main();
 
-const deleteInDB = async () => {
-    const ProductModel = mongoose.model('products', ProductSchema);
-    let data = await ProductModel.deleteOne({name: 'Pro 8'});
-    console.log(data);  // { acknowledged: true, deletedCount: 1 }
-};
-// deleteInDB();
-
-const findInDB = async () => {
-    const ProductModel = mongoose.model('products', ProductSchema);
-    let data = await ProductModel.find({name: 'A 50'});
-    console.log(data);
-    // [
-    //     {
-    //       _id: new ObjectId("62d227967749213e3cab257f"),
-    //       name: 'A 50',
-    //       brand: 'Samsung',
-    //       price: 16000,
-    //       category: 'Mobile'
-    //     }
-    // ]
-};
-findInDB();
+// module.exports = main;
