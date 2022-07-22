@@ -1,26 +1,20 @@
-const mongoose = require('mongoose');
+const express = require('express');
+const multer = require('multer');
+const app = express();
 
-const main = async () => {
-    await mongoose.connect("mongodb://0.0.0.0:27017/eComDB");
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: function(req, file, cb) {
+            cb(null, "uploadFolder")    // folderName
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.fieldname + "-" + Date.now() + '.jpg') // fileName
+        }
+    })
+}).single("file_2");
 
-    const ProductSchema = new mongoose.Schema({
-        name: String,
-        price: Number
-    });
-                                    //  collectionName, SchemeName
-    const ProductModel = mongoose.model('products', ProductSchema);
+app.post('/upload', upload, (req, resp) => {
+    resp.send("file upload");
+});
 
-    let data = new ProductModel({name: 'M8', price: 7800});
-    let result = await data.save();
-    console.log(result);    
-    // { name: 'M8', _id: new ObjectId("62d68b1e14a1270dc231e8c1"), __v: 0 }
-
-    // {
-    //     name: 'M8',
-    //     price: 7800,
-    //     _id: new ObjectId("62d68b9c4484683a3436e385"),
-    //     __v: 0
-    // }
-}
-
-main();
+app.listen(8000);
