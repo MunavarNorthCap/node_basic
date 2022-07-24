@@ -1,2 +1,18 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://0.0.0.0:27017/eComDB');
+const mysql = require('mysql');
+
+const conn = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'test'
+});
+
+conn.connect((err) => {
+    if(err) {
+        console.warn("error");
+    } else {
+        console.log('connected');
+    }
+});
+
+module.exports = conn;

@@ -1,0 +1,22 @@
+const os = require('os');
+// console.log(os);
+// console.log(os.arch()); // x64
+// console.log(os.freemem());  // 1112735744 - this ram free this will be in bytes
+// console.log(os.freemem()/ (1024*1024)); // 1143.17578125 Mega Byte
+// console.log(os.totalmem()/ (1024*1024*1024));   // 7.8708953857421875 GB
+
+// System Name - Host Name
+// console.log(os.hostname()); // LAPTOP-NI67MVIT
+
+// Platform Check
+// console.log(os.platform()); // win32
+
+// user Info
+// console.log(os.userInfo());
+// {
+//     uid: -1,
+//     gid: -1,
+//     username: 'Malik',
+//     homedir: 'C:\\Users\\91970',
+//     shell: null
+// }
